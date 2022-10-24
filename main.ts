@@ -42,8 +42,8 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 function makeBoatVisible (boatArray: Sprite[]) {
-    for (let previousBoatSprite of boatArray) {
-        previousBoatSprite.setFlag(SpriteFlag.Invisible, false)
+    for (let currentBoatSprite of boatArray) {
+        currentBoatSprite.setFlag(SpriteFlag.Invisible, false)
     }
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -70,13 +70,13 @@ function switchPlayer () {
     }
     if (currentPlayer == "Player1") {
         currentPlayer = "Player2"
-        for (let value of boatSpriteArrayP1) {
-            makeBoatInvisible(value)
+        for (let boatIterator of boatSpriteArrayP1) {
+            makeBoatInvisible(boatIterator)
         }
     } else {
         currentPlayer = "Player1"
-        for (let value2 of boatSpriteArrayP2) {
-            makeBoatInvisible(value2)
+        for (let boatIterator of boatSpriteArrayP2) {
+            makeBoatInvisible(boatIterator)
         }
     }
 }
@@ -114,8 +114,8 @@ function moveBoat (boatArray: any[], boatRotateArray: string[]) {
 }
 function isHitOrMiss (enemyBoats: Sprite[][]) {
     for (let index = 0; index <= 2; index++) {
-        for (let currentBoatSprite2 of enemyBoats[index]) {
-            if (grid.spriteCol(currentBoatSprite2) == grid.spriteCol(cursor) && grid.spriteRow(currentBoatSprite2) == grid.spriteRow(cursor)) {
+        for (let currentBoatSprite of enemyBoats[index]) {
+            if (grid.spriteCol(currentBoatSprite) == grid.spriteCol(cursor) && grid.spriteRow(currentBoatSprite) == grid.spriteRow(cursor)) {
                 boomSprite = sprites.create(img`
                     . . . . 2 2 2 2 2 2 2 2 . . . . 
                     . . . 2 4 4 4 5 5 4 4 4 2 2 2 . 
@@ -325,13 +325,13 @@ function initP2 () {
         `, SpriteKind.Boat2)
     ]]
     boatRotateArrayP2 = ["up", "up", "up"]
-    for (let value4 of boatSpriteArrayP2) {
-        makeBoatInvisible(value4)
+    for (let boatIterator of boatSpriteArrayP2) {
+        makeBoatInvisible(boatIterator)
     }
 }
 function makeBoatInvisible (boatArray: Sprite[]) {
-    for (let value3 of boatArray) {
-        value3.setFlag(SpriteFlag.Invisible, true)
+    for (let currentBoatSprite of boatArray) {
+        currentBoatSprite.setFlag(SpriteFlag.Invisible, true)
     }
 }
 function turnBoat (boatNum: number, boatRotateArray: string[]) {
@@ -343,9 +343,9 @@ function turnBoat (boatNum: number, boatRotateArray: string[]) {
 }
 function isOverlapping (boatSpriteArrayPX: Sprite[][]) {
     for (let index = 0; index <= currentBoat - 1; index++) {
-        for (let previousBoatSprite2 of boatSpriteArrayPX[index]) {
-            for (let currentBoatSprite2 of boatSpriteArrayPX[currentBoat]) {
-                if (grid.spriteCol(previousBoatSprite2) == grid.spriteCol(currentBoatSprite2) && grid.spriteRow(previousBoatSprite2) == grid.spriteRow(currentBoatSprite2)) {
+        for (let previousBoatSprite of boatSpriteArrayPX[index]) {
+            for (let currentBoatSprite of boatSpriteArrayPX[currentBoat]) {
+                if (grid.spriteCol(previousBoatSprite) == grid.spriteCol(currentBoatSprite) && grid.spriteRow(previousBoatSprite) == grid.spriteRow(currentBoatSprite)) {
                     return 1
                 }
             }
@@ -530,8 +530,8 @@ sprites.create(img`
     . . . . . b b b b b b . . . . . 
     `, SpriteKind.Boat2)
 ]]
-for (let value42 of boatSpriteArrayP1) {
-    makeBoatInvisible(value42)
+for (let boatIterator of boatSpriteArrayP1) {
+    makeBoatInvisible(boatIterator)
 }
 moveBoatFlag = 1
 cursor = sprites.create(img`
